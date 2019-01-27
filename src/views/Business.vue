@@ -1,16 +1,11 @@
 <template>
   <div>
-    <Amap />
+    <router-link to="/business/shop_falvors">区域商家类型分布</router-link>
   </div>
 </template>
 
 <script>
-import Amap from '@/components/Amap.vue'
-
 export default {
-  name: 'business',
-  components: {
-    Amap
-  }
+  name: 'business'
 }
 </script>
