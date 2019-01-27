@@ -17,30 +17,31 @@
 </template>
 
 <script>
-import { AMapManager } from "vue-amap";
-let amapManager = new AMapManager();
+import { AMapManager } from 'vue-amap'
+let amapManager = new AMapManager()
 
 export default {
   methods: {
-    async getData() {
+    async getData () {
       const { data } = await this.axios.get(
         `http://api.data-center-service.top:8080/eleme/shops/falvors?latitude=${
           this.latitude
         }&longitude=${this.longitude}`
-      );
+      )
       if (data.length === 0) {
-        alert("该区域暂未收录, 等待后台服务录入");
+        alert('该区域暂未收录, 等待后台服务录入')
       } else {
         this.chartData.rows = data.map(item => {
           return {
             店铺类型: item.flavorName,
             区域内数量: item.count
-          };
-        });
+          }
+        })
+        this.dialogTableVisible = true
       }
     }
   },
-  data: function() {
+  data: function () {
     return {
       latitude: 0,
       longitude: 0,
@@ -52,33 +53,32 @@ export default {
         moveend: () => {},
         zoomchange: () => {},
         click: e => {
-          this.longitude = e.lnglat.O;
-          this.latitude = e.lnglat.P;
-          this.dialogTableVisible = true;
-          this.getData();
+          this.longitude = e.lnglat.O
+          this.latitude = e.lnglat.P
+          this.getData()
         }
       },
       plugin: [],
       chartData: {
-        columns: ["店铺类型", "区域内数量"],
+        columns: ['店铺类型', '区域内数量'],
         rows: []
       },
       dialogTableVisible: false,
       dialogFormVisible: false,
       form: {
-        name: "",
-        region: "",
-        date1: "",
-        date2: "",
+        name: '',
+        region: '',
+        date1: '',
+        date2: '',
         delivery: false,
         type: [],
-        resource: "",
-        desc: ""
+        resource: '',
+        desc: ''
       },
-      formLabelWidth: "120px"
-    };
+      formLabelWidth: '120px'
+    }
   }
-};
+}
 </script>
 
 <style scoped>
