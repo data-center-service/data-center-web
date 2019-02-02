@@ -11,7 +11,7 @@
       class="amap-demo"
     ></el-amap>
     <el-dialog title="分析" :visible.sync="dialogTableVisible">
-      <ve-pie :data="chartData"></ve-pie>
+      <ve-bar :data="chartData" :settings="chartSettings"></ve-bar>
     </el-dialog>
   </div>
 </template>
@@ -62,6 +62,12 @@ export default {
       chartData: {
         columns: ['店铺类型', '区域内数量'],
         rows: []
+      },
+      chartSettings: {
+        dataOrder: {
+          label: '区域内数量',
+          order: 'desc'
+        }
       },
       dialogTableVisible: false,
       dialogFormVisible: false,
